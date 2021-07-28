@@ -1,0 +1,57 @@
+.buttonForm {
+    margin-top: 10px;
+    background-color: #0078D4;
+    color: #fff;
+    padding: 5px 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    transition: 200ms;
+    transition-timing-function: ease-in-out;
+    -webkit-transition: 200ms;
+    -webkit-transition-timing-function: ease-in-out;
+}
+
+.buttonForm:hover {
+    background-color: #106EBE;
+    cursor: pointer;
+    box-shadow: 0 0 0 3px #cbd6ee;
+    transition: 200ms;
+    transition-timing-function: ease-in-out;
+    -webkit-transition: 200ms;
+    -webkit-transition-timing-function: ease-in-out;
+}
+
+.buttonForm:active {
+    background-color: #005A9E;
+}
+
+h3 {
+    margin: 5px 0px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 40px;
+}
+
+input {
+    border-radius: 5px;
+    border-color: #E6E6E6;
+    padding: 2px 6px;
+    border-style: double;
+}
+
+input:focus {   
+    border-color: #005A9E;
+    outline: #005A9E;
+}
+
+.text {
+    margin: 0;
+}
+
+.divButton {
+    display: flex;
+    justify-content: center;
+}

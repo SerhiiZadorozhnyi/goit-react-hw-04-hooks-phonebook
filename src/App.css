@@ -1,0 +1,19 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+.Section {
+    margin: 0 auto 15px;
+    max-width: 500px;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    border: 1px solid #E6E6E6;
+    padding: 0 30px 30px;
+}
+
+.bigText {
+  display: flex;
+  justify-content: center;
+}

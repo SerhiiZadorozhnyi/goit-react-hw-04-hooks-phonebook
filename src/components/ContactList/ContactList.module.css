@@ -1,0 +1,53 @@
+.contactList {
+    margin: 0 auto;
+    max-width: 300px;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.contactListItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: F2F2F2;
+    border: 2px solid #E6E6E6;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.contactListItem:not(:last-of-type) {
+    margin-bottom: 5px;
+}
+
+p {
+    margin: 6px 5px;
+    padding-right: 5px;
+}
+
+.contactListButton {
+    background-color: #ac373c;
+    background-position: center;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    padding: 5px 8px;
+    font-size: 16px;
+    transition: 200ms;
+    transition-timing-function: ease-in-out;
+    -webkit-transition: 200ms;
+    -webkit-transition-timing-function: ease-in-out;
+}
+
+.contactListButton:hover {
+    background-color: #A4262C;
+    cursor: pointer;
+    transition: 200ms;
+    transition-timing-function: ease-in-out;
+    -webkit-transition: 200ms;
+    -webkit-transition-timing-function: ease-in-out;
+    box-shadow: 0 0 0 3px #fcbbbb;
+}
+
+.contactListButton:active {
+    background-color: #801a1f;
+}

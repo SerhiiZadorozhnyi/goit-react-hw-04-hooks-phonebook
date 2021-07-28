@@ -1,0 +1,12 @@
+.filter {
+    margin: 0 auto 15px;
+    max-width: 300px;
+    background-color: F2F2F2;
+    border: 2px solid #E6E6E6;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input {
+    width: 94%;
+}
