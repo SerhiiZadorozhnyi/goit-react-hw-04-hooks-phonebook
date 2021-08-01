@@ -1,12 +1,19 @@
-.filter {
+.input {
     margin: 0 auto 15px;
     max-width: 300px;
     background-color: F2F2F2;
     border: 2px solid #E6E6E6;
     padding: 10px;
     border-radius: 10px;
+    width: calc(100% - 24px);
 }
 
-input {
-    width: 94%;
+.input:active {
+    border-color: #005A9E;
+    outline: #005A9E;
+}
+
+.input:focus {
+    border-color: #005A9E;
+    outline: #005A9E;
 }
