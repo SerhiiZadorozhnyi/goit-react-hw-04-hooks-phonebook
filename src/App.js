@@ -1,74 +1,72 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContactForm from 'components/ContactForm/ContactForm';
 import Filter from 'components/Filter/Filter';
 import ContactList from 'components/ContactList/ContactList';
 import styles from './App.css';
 import { v4 as uuidv4 } from "uuid";
 
-const savedContacts = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-];
 
-function App() {
-  const [contacts, setContacts] = useState(savedContacts);
-  const [filter, setFilter] = useState('');
-  const firstUse = useRef(true);
+const useLocalStorage = (key, defaultValue) => {
+  const [state, setState] = useState(
+    () => JSON.parse(window.localStorage.getItem(key)) ?? defaultValue,
+  );
 
   useEffect(() => {
-    if (firstUse.current) {
-      const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+    window.localStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
 
-      if (parsedContacts) {
-        setContacts(parsedContacts);
-      }
+  return [state, setState];
+};
 
-      firstUse.current = false;
-      return;
-    }
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+function App() {
+
+  const [contacts, setContacts] = useLocalStorage('contacts', []);
+  const [filter, setFilter] = useState('');
 
   const addContact = (name, number) => {
-    const contact = {
+    if(contacts.find(contact => contact.name === name)) {
+      alert(`Контакт з таким іменнем вже існує!`);
+      return;
+    }
+    const newContacts = {
       id: uuidv4(),
       name,
       number,
     };
 
-    setContacts([contact, ...contacts]);
-  };
-
-  const getVisibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
-    );
+    setContacts(prevState => [newContacts, ...prevState]);
   };
 
   const deleteContact = contactId => {
     setContacts(contacts.filter(contact => contact.id !== contactId));
   };
 
-  const visibleContacts = getVisibleContacts();
+  const changeFilter = ({ target }) => {
+    setFilter(target.value);
+  };
+
+  const visibleContacts = () => {
+    const normalized = filter.toLowerCase().trim();
+    return contacts.filter(({ name }) => 
+      name.toLowerCase().includes(normalized),
+    );
+  };
+
   const totalContactsCount = contacts.length;
 
   return (
     <>
       <div className={styles.container}>
         <section title="Phonebook" className="Section">
-            <h1 className={styles.bigText}>Phonebook</h1>
-            <ContactForm onSubmit={addContact} contacts={contacts} />
+            <h1 className={styles.bigText}>Телефонна книга</h1>
+            <ContactForm onSubmit={addContact} />
         </section>
         <section title="Contacts" className="Section">
-            <h2 className={styles.bigText}>Contacts</h2>
-            <p>Общее кол-во: {totalContactsCount}</p>
-            <Filter value={filter} onChange={event => setFilter(event.currentTarget.value)} />
+            <h2 className={styles.bigText}>Контакти</h2>
+            <p>Загальна кількість: {totalContactsCount}</p>
+            <Filter value={filter} onChange={changeFilter} />
             <ContactList
-              contacts={visibleContacts}
+              contacts={visibleContacts()}
               onDeleteContact={deleteContact}
             />
         </section>
